@@ -28,16 +28,16 @@ const Miner = () => {
             </div>
 
             <div className="border-b pb-3 border-[#c5c5c5]">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mt-3">
 
                 <input
                   type="number"
                   placeholder="0.0 ETH"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="outline-none placeholder-[#AFE84B] placeholder-custom w-full placeholder-text-right px-2 py-2 mt-2 border"
+                  className="outline-none placeholder-[#AFE84B] placeholder-custom w-full placeholder-text-right p-3 border"
                 />
-                <button className="py-1 px-3 bg-[#AFE84B] h-full" onClick={() => setAmount(100)}>
+                <button className="p-3 bg-[#AFE84B] h-full text-slate-100" onClick={() => setAmount(100)}>
                   <p>MAX</p>
                 </button>
               </div>
