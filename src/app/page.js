@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from "@/components/Footer";
 import Miner from "@/components/Miner";
 import TopBar from "@/components/TopBar";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <section id="home_page">
         <Miner />
       </section>
+      <Footer />
     </div>
   );
 }

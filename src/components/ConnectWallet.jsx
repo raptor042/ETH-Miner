@@ -27,11 +27,11 @@ export default function ConnectWallet() {
 
     return (
         <div id="connect-wallet">
-            <button onClick={() => open()} className="py-3 px-4 rounded-md flex justify-center items-center bg-[#F4C400]">
+            <button onClick={() => open()} className="py-3 px-4 rounded-md flex justify-center items-center bg-[#F4C400] text-white">
                 {isConnected ?
                     account : "Connect Wallet"
                 }
             </button>
         </div>
     )
-}
+} 

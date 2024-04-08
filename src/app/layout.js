@@ -4,7 +4,7 @@ import { Web3ModalProvider } from "../context/Web3Modal";
 
 const inter = Kanit({
   subsets: ["latin"],
-  weight: "300",
+  weight: ["300", "400"],
 });
 
 export const metadata = {
