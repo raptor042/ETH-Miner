@@ -1,6 +1,6 @@
 "use client"
 
-import logo from "../assets/img/logo.png";
+import logo from "../../public/logo.png";
 import ConnectWallet from "./ConnectWallet";
 import Image from "next/image";
 

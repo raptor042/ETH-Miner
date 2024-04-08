@@ -37,8 +37,8 @@ const base_sepolia = {
 }
 
 const metadata = {
-    name: "Hamster Betting",
-    description: "Place your bets on any of your favorite hamsters."
+    name: "Profit-IQ - Ethereum Miner",
+    description: "Profit-IQ - Ethereum Miner."
 }
 
 createWeb3Modal({
