@@ -1,4 +1,4 @@
-export const MINER_CA = "0x0322660154eAD6092E9E91fBc3Dd12FfF1Ce9e1e";
+export const MINER_CA = "0x7a729a8D431C3BcfAaabfdec8edCb6D174Ce9B64";
 
 export const MINER_ABI = [
   {
@@ -83,6 +83,25 @@ export const MINER_ABI = [
       }
     ],
     "name": "Mine",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "ReMine",
     "type": "event"
   },
   {
