@@ -13,6 +13,7 @@ import Referral from "./Referral";
 const Miner = () => {
   const [disabled, setDisabled] = useState(true)
   const [amount, setAmount] = useState(0)
+  const [apy, setAPY] = useState(0)
   const [deposited, setDeposited] = useState(0.0)
   const [eth_balance, setETHBalance] = useState(0.0)
   const [eth_mined, setETHMined] = useState(0.0)
@@ -28,7 +29,8 @@ const Miner = () => {
   const { walletProvider } = useWeb3ModalProvider()
 
 
-  const [refAddress, setRefAddress] = useState("");
+  const [refAddress, setRefAddress] = useState("")
+  const [referred, setReferred] = useState(false)
 
 
   let provider;
@@ -42,18 +44,17 @@ const Miner = () => {
   };
 
   useEffect(() => {
-    if (location.search) {
-      setRefAddress(String(new URLSearchParams(location.search).get("ref")));
-    }
-  }, []);
-
-  useEffect(() => {
     if (isConnected) {
       setInterval(() => {
         eth_miner()
-      }, 3000)
-      // eth_miner()
+      }, 2000)
+
       setDisabled(false)
+
+      if (location.search) {
+        setRefAddress(String(new URLSearchParams(location.search).get("ref")))
+        setReferred(true)
+      }
     }
   }, [
     disabled,
@@ -80,6 +81,10 @@ const Miner = () => {
     const minDuration = await miner.minDuration()
     console.log(Number(minDuration))
 
+    const apy = await miner.apy()
+    console.log(Number(apy))
+    setAPY(Number(apy))
+
     const tFee = await miner.transaction_fee()
     console.log(ethers.formatEther(tFee))
     setTransactionFee(ethers.formatEther(tFee))
@@ -87,6 +92,11 @@ const Miner = () => {
     const user = await miner.user(address)
     console.log(user)
     setDeposited(ethers.formatEther(user[1]))
+
+    if(user[3] != ethers.ZeroAddress) {
+      setRefAddress(user[3])
+      setReferred(true)
+    }
 
     const roi = ethers.formatEther(user[2])
     const lastDeposited = Number(user[5])
@@ -144,15 +154,19 @@ const Miner = () => {
       setDisabled(true)
       setLoadingA(true)
 
-      await miner.mine(ethers.ZeroAddress, { value: ethers.parseEther(`${deposit}`) })
+      const ref = referred ? refAddress : ethers.ZeroAddress
+
+      await miner.mine(ref, { value: ethers.parseEther(`${deposit}`) })
 
       miner.on("Mine", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        toast.success("Deposited Successfully.")
+        if(user == address) {
+          toast.success("Deposited Successfully.")
 
-        setDisabled(false)
-        setLoadingA(false)
+          setDisabled(false)
+          setLoadingA(false)
+        }
       })
     } catch (error) {
       console.log(error)
@@ -184,10 +198,12 @@ const Miner = () => {
       miner.on("Withdraw", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        toast.success("Withdrawal Successful.")
+        if(user == address) {
+          toast.success("Withdrawal Successful.")
 
-        setDisabled(false)
-        setLoadingB(false)
+          setDisabled(false)
+          setLoadingB(false)
+        }
       })
     } catch (error) {
       console.log(error)
@@ -219,10 +235,12 @@ const Miner = () => {
       miner.on("ReMine", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        toast.success("Re-Mined Successfully.")
+        if(user == address) {
+          toast.success("Re-Mined Successfully.")
 
-        setDisabled(false)
-        setLoadingC(false)
+          setDisabled(false)
+          setLoadingC(false)
+        }
       })
     } catch (error) {
       console.log(error)
@@ -254,10 +272,12 @@ const Miner = () => {
       miner.on("Claim", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        toast.success("Claimed Successfully.")
+        if(user == address) {
+          toast.success("Claimed Successfully.")
 
-        setDisabled(false)
-        setLoadingD(false)
+          setDisabled(false)
+          setLoadingD(false)
+        }
       })
     } catch (error) {
       console.log(error)
@@ -293,9 +313,7 @@ const Miner = () => {
             <div className="flex items-center my-3 gap-3">
               <p className="text-lg">Projected Yield</p>
               <p className="text-yellow-600 p-1 bg-yellow-200 rounded-xl text-sm">
-                APY{" "}
-                1578
-                %
+                APY {apy}%
               </p>
             </div>
 
@@ -392,10 +410,9 @@ const Miner = () => {
               </div>
             </div>
           </div>
-
           <Referral
-            address={"0x5273hh3t33337373"} // referral addresscode for currently logged in user
-            referred={false} // set true based on whether user data exists or not or if the referrer address field in userdata exists depending on how its going to work
+            address={address} // referral addresscode for currently logged in user
+            referred={referred} // set true based on whether user data exists or not or if the referrer address field in userdata exists depending on how its going to work
             referrer={refAddress}
             setReferrer={handleReferralAddress}
           />
