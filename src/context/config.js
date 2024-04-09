@@ -1,4 +1,4 @@
-export const MINER_CA = "0xF2EBa26b82602D3641227716a79ef2D9Cd7D2359";
+export const MINER_CA = "0xABaE7171c569569C64c9e385C7f08aED1765972a";
 
 export const MINER_ABI = [
   {
