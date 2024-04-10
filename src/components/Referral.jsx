@@ -41,7 +41,7 @@ const Referral = (props) => {
                 {/* </p> */}
                 <h2 className="my-2">Referral Link</h2>
                 <p className="bg-slate-200 p-3 py-3 rounded-md text-sm text-yellow-500 flex items-center justify-between gap-3">
-                    <span className="break-words overflow-clip">{referralLink}</span>
+                    <span className="break-words overflow-clip">{referralLink.slice(0, 36) + "...."}</span>
                     <button
                         className="p-3 h-full text-slate-600 hover:bg-slate-300 rounded"
                         onClick={handleCopyToClipboard}
