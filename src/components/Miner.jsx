@@ -93,7 +93,7 @@ const Miner = () => {
     console.log(user)
     setDeposited(ethers.formatEther(user[1]))
 
-    if(user[3] != ethers.ZeroAddress) {
+    if (user[3] != ethers.ZeroAddress) {
       setRefAddress(user[3])
       setReferred(true)
     }
@@ -161,7 +161,7 @@ const Miner = () => {
       miner.on("Mine", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        if(user == address) {
+        if (user == address) {
           toast.success("Deposited Successfully.")
 
           setDisabled(false)
@@ -198,7 +198,7 @@ const Miner = () => {
       miner.on("Withdraw", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        if(user == address) {
+        if (user == address) {
           toast.success("Withdrawal Successful.")
 
           setDisabled(false)
@@ -235,7 +235,7 @@ const Miner = () => {
       miner.on("ReMine", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        if(user == address) {
+        if (user == address) {
           toast.success("Re-Mined Successfully.")
 
           setDisabled(false)
@@ -272,7 +272,7 @@ const Miner = () => {
       miner.on("Claim", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        if(user == address) {
+        if (user == address) {
           toast.success("Claimed Successfully.")
 
           setDisabled(false)
@@ -327,7 +327,7 @@ const Miner = () => {
                   onChange={(e) => setAmount(e.target.value)}
                   className="outline-none w-full placeholder-text-right p-3 border"
                 />
-                <button className="p-3 bg-yellow-400 h-full text-white" onClick={() => setAmount(eth_balance - 0.0001)}>
+                <button className="p-3 bg-[#04D939] h-full text-white" onClick={() => setAmount(eth_balance - 0.0001)}>
                   <p>MAX</p>
                 </button>
               </div>
@@ -337,7 +337,7 @@ const Miner = () => {
                   className={
                     disabled
                       ? `w-full p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                      : `w-full p-2 mt-3  bg-[#D9B504]  rounded-md cursor-pointer text-white`
+                      : `w-full p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
                   }
                   disabled={disabled}
                 >
@@ -355,7 +355,7 @@ const Miner = () => {
                 className={
                   disabled
                     ? `w-full p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                    : `w-full p-2 mt-3 bg-[#D9B504]  rounded-md cursor-pointer text-white`
+                    : `w-full p-2 mt-3bg-[#04BF45] rounded-md cursor-pointer text-white`
                 }
                 disabled={disabled}
               >
@@ -383,8 +383,8 @@ const Miner = () => {
                   onClick={onReMine}
                   className={
                     disabled
-                      ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                      : `w-[45%] p-2 mt-3  bg-[#D9B504]  rounded-md cursor-pointer text-white`
+                      ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer t#04BF45ext-slate-950`
+                      : `w-[45%] p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
                   }
                   disabled={disabled}
                 >
@@ -398,7 +398,7 @@ const Miner = () => {
                   className={
                     disabled
                       ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                      : `w-[45%] p-2 mt-3  bg-[#D9B504]  rounded-md cursor-pointer text-white`
+                      : `w-[45%] p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
                   }
                   disabled={disabled}
                 >
