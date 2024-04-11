@@ -1,4 +1,4 @@
-export const MINER_CA = "0xABaE7171c569569C64c9e385C7f08aED1765972a";
+export const MINER_CA = "0x833D9eA363093E4f774E794643Dc77911882F803"
 
 export const MINER_ABI = [
   {
@@ -150,6 +150,19 @@ export const MINER_ABI = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "calculateRewards",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -267,10 +280,16 @@ export const MINER_ABI = [
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "rewards",
+        "type": "uint256"
+      }
+    ],
     "name": "claimRewards",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -342,7 +361,7 @@ export const MINER_ABI = [
     "inputs": [],
     "name": "re_mine",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -480,10 +499,16 @@ export const MINER_ABI = [
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "rewards",
+        "type": "uint256"
+      }
+    ],
     "name": "withdraw",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

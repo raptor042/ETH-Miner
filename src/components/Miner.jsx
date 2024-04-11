@@ -17,7 +17,6 @@ const Miner = () => {
   const [deposited, setDeposited] = useState(0.0)
   const [eth_balance, setETHBalance] = useState(0.0)
   const [eth_mined, setETHMined] = useState(0.0)
-  const [tFee, setTransactionFee] = useState()
 
   const [loadingA, setLoadingA] = useState(false)
   const [loadingB, setLoadingB] = useState(false)
@@ -45,9 +44,11 @@ const Miner = () => {
 
   useEffect(() => {
     if (isConnected) {
-      setInterval(() => {
-        eth_miner()
-      }, 2000)
+      // setInterval(() => {
+      //   eth_miner()
+      // }, 2000)
+
+      eth_miner()
 
       setDisabled(false)
 
@@ -84,10 +85,6 @@ const Miner = () => {
     const apy = await miner.apy()
     console.log(Number(apy))
     setAPY(Number(apy))
-
-    const tFee = await miner.transaction_fee()
-    console.log(ethers.formatEther(tFee))
-    setTransactionFee(ethers.formatEther(tFee))
 
     const user = await miner.user(address)
     console.log(user)
@@ -148,15 +145,12 @@ const Miner = () => {
     )
 
     try {
-      const deposit = Number(tFee) + Number(amount)
-      console.log(deposit)
-
       setDisabled(true)
       setLoadingA(true)
 
       const ref = referred ? refAddress : ethers.ZeroAddress
 
-      await miner.mine(ref, { value: ethers.parseEther(`${deposit}`) })
+      await miner.mine(ref, { value: ethers.parseEther(`${amount}`) })
 
       miner.on("Mine", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
@@ -190,10 +184,14 @@ const Miner = () => {
     )
 
     try {
+      const amount = await miner.calculateRewards()
+      const rewards = Number(ethers.formatEther(amount))
+      console.log(rewards)
+
       setDisabled(true)
       setLoadingB(true)
 
-      await miner.withdraw({ value: ethers.parseEther(`${tFee}`) })
+      await miner.withdraw(ethers.parseEther(`${rewards}`))
 
       miner.on("Withdraw", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
@@ -230,7 +228,7 @@ const Miner = () => {
       setDisabled(true)
       setLoadingC(true)
 
-      await miner.re_mine({ value: ethers.parseEther(`${tFee}`) })
+      await miner.re_mine()
 
       miner.on("ReMine", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
@@ -264,10 +262,14 @@ const Miner = () => {
     )
 
     try {
+      const amount = await miner.calculateRewards()
+      const rewards = ethers.formatEther(amount)
+      console.log(rewards)
+
       setDisabled(true)
       setLoadingD(true)
 
-      await miner.claimRewards({ value: ethers.parseEther(`${tFee}`) })
+      await miner.claimRewards(ethers.parseEther(`${rewards}`))
 
       miner.on("Claim", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
