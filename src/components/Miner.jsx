@@ -357,7 +357,7 @@ const Miner = () => {
                 className={
                   disabled
                     ? `w-full p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                    : `w-full p-2 mt-3bg-[#04BF45] rounded-md cursor-pointer text-white`
+                    : `w-full p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
                 }
                 disabled={disabled}
               >

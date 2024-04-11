@@ -5,7 +5,7 @@ import React, { useState } from "react";
 const Referral = (props) => {
     const [copyText, setCopyText] = useState("Copy");
 
-    const referralLink = `http://localhost:3000?ref=${props.address ? props.address : ""}`; // change during production
+    const referralLink = `https://miner.profitiqai.tech?ref=${props.address ? props.address : ""}`; // change during production
 
     const handleCopyToClipboard = () => {
         navigator.clipboard.writeText(referralLink);
