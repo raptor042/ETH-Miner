@@ -90,7 +90,7 @@ const Miner = () => {
     console.log(user)
     setDeposited(ethers.formatEther(user[1]))
 
-    if(user[3] != ethers.ZeroAddress) {
+    if (user[3] != ethers.ZeroAddress) {
       setRefAddress(user[3])
       setReferred(true)
     }
@@ -155,7 +155,7 @@ const Miner = () => {
       miner.on("Mine", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        if(user == address) {
+        if (user == address) {
           toast.success("Deposited Successfully.")
 
           setDisabled(false)
@@ -196,7 +196,7 @@ const Miner = () => {
       miner.on("Withdraw", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        if(user == address) {
+        if (user == address) {
           toast.success("Withdrawal Successful.")
 
           setDisabled(false)
@@ -233,7 +233,7 @@ const Miner = () => {
       miner.on("ReMine", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        if(user == address) {
+        if (user == address) {
           toast.success("Re-Mined Successfully.")
 
           setDisabled(false)
@@ -274,7 +274,7 @@ const Miner = () => {
       miner.on("Claim", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
 
-        if(user == address) {
+        if (user == address) {
           toast.success("Claimed Successfully.")
 
           setDisabled(false)
@@ -305,11 +305,11 @@ const Miner = () => {
           <div className="bg-white p-3 w-full rounded-[10px]  shadow-lg pb-5">
             <div className="px-2 py-2 flex justify-between ">
               <p className="text-slate-950">Deposited</p>
-              <p className="text-yellow-400 font-semibold">{deposited} ETH</p>
+              <p className="text-[#D9B504] font-semibold">{deposited} ETH</p>
             </div>
             <div className="px-2 py-2 flex justify-between ">
               <p className="text-slate-950">ETH Balance</p>
-              <p className="text-yellow-400 font-semibold">{eth_balance} ETH</p>
+              <p className="text-[#D9B504] font-semibold">{eth_balance} ETH</p>
             </div>
 
             <div className="flex items-center my-3 gap-3">
@@ -329,7 +329,7 @@ const Miner = () => {
                   onChange={(e) => setAmount(e.target.value)}
                   className="outline-none w-full placeholder-text-right p-3 border"
                 />
-                <button className="p-3 bg-yellow-400 h-full text-white" onClick={() => setAmount(eth_balance - 0.0001)}>
+                <button className="p-3 bg-[#04D939] h-full text-white" onClick={() => setAmount(eth_balance - 0.0001)}>
                   <p>MAX</p>
                 </button>
               </div>
@@ -339,7 +339,7 @@ const Miner = () => {
                   className={
                     disabled
                       ? `w-full p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                      : `w-full p-2 mt-3 bg-slate-600 rounded-md cursor-pointer text-white`
+                      : `w-full p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
                   }
                   disabled={disabled}
                 >
@@ -357,7 +357,7 @@ const Miner = () => {
                 className={
                   disabled
                     ? `w-full p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                    : `w-full p-2 mt-3 bg-slate-600 rounded-md cursor-pointer text-white`
+                    : `w-full p-2 mt-3bg-[#04BF45] rounded-md cursor-pointer text-white`
                 }
                 disabled={disabled}
               >
@@ -369,7 +369,7 @@ const Miner = () => {
             </div>
 
             <p className="mt-3 flex items-center justify-center gap-3">
-              <BiSolidDiamond className="text-yellow-400" /> Mine ETH and earn rewards
+              <BiSolidDiamond className="text-[#D9B504]" /> Mine ETH and earn rewards
             </p>
 
           </div>
@@ -377,7 +377,7 @@ const Miner = () => {
           <div className="bg-white p-3 w-full rounded-[10px]  shadow-lg pb-5 mt-3">
             <div className="">
               <div className="px-2 py-2 flex justify-between ">
-                <p className="font-semibold text-yellow-400">ETH Mined</p>
+                <p className="font-semibold text-[#D9B504]">ETH Mined</p>
                 <p className=" font-semibold">{eth_mined} ETH</p>
               </div>
               <div className="flex justify-between ">
@@ -385,8 +385,8 @@ const Miner = () => {
                   onClick={onReMine}
                   className={
                     disabled
-                      ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                      : `w-[45%] p-2 mt-3 bg-slate-600 rounded-md cursor-pointer text-white`
+                      ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer t#04BF45ext-slate-950`
+                      : `w-[45%] p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
                   }
                   disabled={disabled}
                 >
@@ -400,7 +400,7 @@ const Miner = () => {
                   className={
                     disabled
                       ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                      : `w-[45%] p-2 mt-3 bg-slate-600 rounded-md cursor-pointer text-white`
+                      : `w-[45%] p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
                   }
                   disabled={disabled}
                 >
