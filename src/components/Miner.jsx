@@ -369,7 +369,7 @@ const Miner = () => {
             </div>
 
             <p className="mt-3 flex items-center justify-center gap-3">
-              <BiSolidDiamond className="text-[#D9B504]" /> Mine ETH and earn rewards
+              <BiSolidDiamond className="text-[#D9B504]" /> Stake ETH and earn rewards
             </p>
 
           </div>
@@ -390,7 +390,7 @@ const Miner = () => {
                   }
                   disabled={disabled}
                 >
-                  {!loadingC && <p className="md:text-[15px] text-[12px]">RE-MINE</p>}
+                  {!loadingC && <p className="md:text-[15px] text-[12px]">RE-STAKE</p>}
                   {loadingC &&
                     <FaSpinner className="animate-spin mx-auto text-xl" />
                   }
