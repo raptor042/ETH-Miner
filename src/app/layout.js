@@ -8,8 +8,8 @@ const inter = Kanit({
 });
 
 export const metadata = {
-  title: "Profit-IQ - Ethereum Miner",
-  description: "Profit-IQ - Ethereum Miner",
+  title: "Profit-IQ - Proof of Stake(POS)",
+  description: "Profit-IQ - Proof of Stake(POS)",
 };
 
 export default function RootLayout({ children }) {
