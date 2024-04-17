@@ -44,11 +44,9 @@ const Miner = () => {
 
   useEffect(() => {
     if (isConnected) {
-      // setInterval(() => {
-      //   eth_miner()
-      // }, 2000)
-
-      eth_miner()
+      setInterval(() => {
+        eth_miner()
+      }, 2000)
 
       setDisabled(false)
 
@@ -184,14 +182,10 @@ const Miner = () => {
     )
 
     try {
-      const amount = await miner.calculateRewards()
-      const rewards = ethers.formatEther(amount)
-      console.log(rewards)
-
       setDisabled(true)
       setLoadingB(true)
 
-      await miner.withdraw(ethers.parseEther(`${rewards}`))
+      await miner.withdraw()
 
       miner.on("Withdraw", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
@@ -262,14 +256,10 @@ const Miner = () => {
     )
 
     try {
-      const amount = await miner.calculateRewards()
-      const rewards = ethers.formatEther(amount)
-      console.log(rewards)
-
       setDisabled(true)
       setLoadingD(true)
 
-      await miner.claimRewards(ethers.parseEther(`${rewards}`))
+      await miner.claimRewards()
 
       miner.on("Claim", (user, amount, e) => {
         console.log(user, ethers.formatEther(amount))
