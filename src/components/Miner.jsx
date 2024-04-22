@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Referral from "./Referral";
+import { Timer } from "./Timer";
 
 const Miner = () => {
   const [disabled, setDisabled] = useState(true)
@@ -64,6 +65,18 @@ const Miner = () => {
     isConnected,
     provider
   ])
+
+
+  const getWithdawDate = async () => {
+    const signer = await provider.getSigner();
+    const miner = new ethers.Contract(
+      MINER_CA,
+      MINER_ABI,
+      signer
+    )
+    // TODO finish up timer code 
+  }
+
 
   const eth_miner = async () => {
     const signer = await provider.getSigner()
@@ -284,14 +297,10 @@ const Miner = () => {
   return (
     <div className="relative">
       <ToastContainer />
-      <div className="flex flex-col justify-center items-center relative">
-        {/* <div>
-          <p className="text-[#d5d5d5] text-center -mt-5">
-            Introducing Solana's First Rebase Token And <br />
-            Interest Derivative.
-          </p>
-        </div> */}
-        <div className="lg:w-[38%] md:w-[50%]  container mt-10 mb-8 ">
+      <div className="relative">
+
+        {/* <div className="lg:w-[38%] md:w-[50%]  container mt-10 mb-8 "> */}
+        <div className=" md:w-[90%] mx-auto container grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-white p-3 w-full rounded-[10px]  shadow-lg pb-5">
             <div className="px-2 py-2 flex justify-between ">
               <p className="text-slate-950">Deposited</p>
@@ -308,7 +317,9 @@ const Miner = () => {
                 APY {apy}%
               </p>
             </div>
-
+            <p className="my-2 text-slate-400 italic text-right">
+              Note: 2% Transaction Fees
+            </p>
             <div className="border-b pb-3 border-[#c5c5c5]">
               <div className="flex items-center gap-2 mt-3">
 
@@ -342,6 +353,7 @@ const Miner = () => {
             </div>
 
             <div>
+
               <button
                 onClick={onWithdraw}
                 className={
@@ -361,53 +373,58 @@ const Miner = () => {
             <p className="mt-3 flex items-center justify-center gap-3">
               <BiSolidDiamond className="text-[#D9B504]" /> Stake ETH and earn rewards
             </p>
-
           </div>
 
-          <div className="bg-white p-3 w-full rounded-[10px]  shadow-lg pb-5 mt-3">
-            <div className="">
-              <div className="px-2 py-2 flex justify-between ">
-                <p className="font-semibold text-[#D9B504]">ETH Staked</p>
-                <p className=" font-semibold">{eth_mined} ETH</p>
+
+
+          <div className="flex flex-col gap-4">
+            <div className="bg-white p-3 w-full rounded-[10px]  shadow-lg pb-5">
+              <div className="">
+                <div className="px-2 py-2 flex justify-between ">
+                  <p className="font-semibold text-[#D9B504]">ETH Staked</p>
+                  <p className=" font-semibold">{eth_mined} ETH</p>
+                </div>
+                <div className="flex justify-between ">
+                  <button
+                    onClick={onReMine}
+                    className={
+                      disabled
+                        ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer t#04BF45ext-slate-950`
+                        : `w-[45%] p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
+                    }
+                    disabled={disabled}
+                  >
+                    {!loadingC && <p className="md:text-[15px] text-[12px]">RE-STAKE</p>}
+                    {loadingC &&
+                      <FaSpinner className="animate-spin mx-auto text-xl" />
+                    }
+                  </button>
+                  <button
+                    onClick={onClaim}
+                    className={
+                      disabled
+                        ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
+                        : `w-[45%] p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
+                    }
+                    disabled={disabled}
+                  >
+                    {!loadingD && <p className="md:text-[15px] text-[12px]">CLAIM REWARD</p>}
+                    {loadingD &&
+                      <FaSpinner className="animate-spin mx-auto text-xl" />
+                    }
+                  </button>
+                </div>
               </div>
-              <div className="flex justify-between ">
-                <button
-                  onClick={onReMine}
-                  className={
-                    disabled
-                      ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer t#04BF45ext-slate-950`
-                      : `w-[45%] p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
-                  }
-                  disabled={disabled}
-                >
-                  {!loadingC && <p className="md:text-[15px] text-[12px]">RE-STAKE</p>}
-                  {loadingC &&
-                    <FaSpinner className="animate-spin mx-auto text-xl" />
-                  }
-                </button>
-                <button
-                  onClick={onClaim}
-                  className={
-                    disabled
-                      ? `w-[45%] p-2 mt-3 bg-[#c5c5c5] rounded-md cursor-pointer text-slate-950`
-                      : `w-[45%] p-2 mt-3 bg-[#04BF45] rounded-md cursor-pointer text-white`
-                  }
-                  disabled={disabled}
-                >
-                  {!loadingD && <p className="md:text-[15px] text-[12px]">CLAIM REWARD</p>}
-                  {loadingD &&
-                    <FaSpinner className="animate-spin mx-auto text-xl" />
-                  }
-                </button>
-              </div>
+              {/* <Timer deadline={new Date("12-06-2024").toUTCString()} /> */}
             </div>
+
+            <Referral
+              address={address} // referral addresscode for currently logged in user
+              referred={referred} // set true based on whether user data exists or not or if the referrer address field in userdata exists depending on how its going to work
+              referrer={refAddress}
+              setReferrer={handleReferralAddress}
+            />
           </div>
-          <Referral
-            address={address} // referral addresscode for currently logged in user
-            referred={referred} // set true based on whether user data exists or not or if the referrer address field in userdata exists depending on how its going to work
-            referrer={refAddress}
-            setReferrer={handleReferralAddress}
-          />
         </div>
       </div>
     </div>

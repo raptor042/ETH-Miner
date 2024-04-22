@@ -5,7 +5,7 @@ import { FaTelegramPlane, FaTwitter } from 'react-icons/fa'
 
 const Footer = () => {
     return (
-        <footer className='flex items-center justify-between gap-4 flex-col md:flex-row text-slate-100 text-sm my-5 mt-4'>
+        <footer className='flex items-center justify-between gap-4 flex-col md:flex-row text-slate-100 text-sm my-5 md:mt-12 mt-4'>
             <p>Copyright © 2024 PROFIT-IQ <span className="text-[#D9B504]">($PRIQ)</span> . All rights reserved.
             </p>
 
