@@ -381,7 +381,7 @@ const Miner = () => {
             <div className="bg-white p-3 w-full rounded-[10px]  shadow-lg pb-5">
               <div className="">
                 <div className="px-2 py-2 flex justify-between ">
-                  <p className="font-semibold text-[#D9B504]">ETH Staked</p>
+                  <p className="font-semibold text-[#D9B504]">ETH Rewards</p>
                   <p className=" font-semibold">{eth_mined} ETH</p>
                 </div>
                 <div className="flex justify-between ">
